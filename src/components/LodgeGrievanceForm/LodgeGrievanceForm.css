@@ -1,0 +1,404 @@
+/* src/components/LodgeGrevience4.css */
+
+/* --- Variables & Reset --- */
+:root {
+    --primary-color: #1a237e;     /* Navy Blue */
+    --secondary-color: #E64A19;   /* Gov Orange */
+    --accent-color: #2e7d32;      /* Success Green */
+    --bg-color: #f3f4f6;
+    --text-dark: #1f2937;
+    --text-light: #6b7280;
+    --white: #ffffff;
+    --border-radius: 8px;
+    --input-height: 48px;
+}
+
+/* --- Main Layout --- */
+.form-container {
+    padding: 20px 15px;
+    background-color: var(--bg-color);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+/* --- Card Styling --- */
+.form-card {
+    background: var(--white);
+    width: 100%;
+    max-width: 800px; /* Limits width on large screens */
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    animation: fadeUp 0.6s ease-out;
+}
+
+/* --- Header --- */
+.form-header {
+    background: linear-gradient(135deg, var(--primary-color), #283593);
+    color: var(--white);
+    padding: 25px 30px;
+}
+
+.form-header h2 {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 0;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
+.form-header p {
+    margin: 8px 0 0 36px; /* Align with text of h2 */
+    font-size: 0.9rem;
+    opacity: 0.9;
+}
+
+/* --- Form Body --- */
+.form-body {
+    padding: 30px;
+}
+
+/* --- Sections --- */
+.form-section {
+    margin-bottom: 35px;
+    border-bottom: 1px solid #e5e7eb;
+    padding-bottom: 25px;
+}
+
+.form-section:last-of-type {
+    border-bottom: none;
+}
+
+.section-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 20px;
+    color: var(--primary-color);
+}
+
+.section-icon {
+    color: var(--secondary-color);
+}
+
+.section-header h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* --- Grid System --- */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr; /* Mobile: 1 column */
+    gap: 20px;
+}
+
+/* --- Form Controls --- */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-group label {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.req {
+    color: #d32f2f;
+}
+
+.form-control {
+    height: var(--input-height);
+    padding: 0 15px;
+    border: 1px solid #d1d5db;
+    border-radius: var(--border-radius);
+    font-size: 1rem;
+    transition: all 0.2s;
+    background-color: #fff;
+    width: 100%;
+}
+
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(26, 35, 126, 0.1);
+    outline: none;
+}
+
+/* Select Wrapper (for custom arrow) */
+.select-wrapper {
+    position: relative;
+}
+
+.select-wrapper select {
+    appearance: none; /* Hide default arrow */
+    cursor: pointer;
+}
+
+.select-icon {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-light);
+    pointer-events: none;
+}
+
+/* Textarea specific */
+.textarea-control {
+    height: auto;
+    min-height: 120px;
+    padding: 15px;
+    line-height: 1.5;
+    resize: vertical;
+}
+
+/* --- Microphone / Voice Input --- */
+.mic-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.mic-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.voice-lang-select {
+    padding: 4px 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 0.8rem;
+    background: white;
+}
+
+.btn-mic {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: #f3f4f6;
+    border: 1px solid #d1d5db;
+    color: var(--text-dark);
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-mic:hover {
+    background: #e5e7eb;
+}
+
+.btn-mic.active {
+    background: #fee2e2;
+    color: #d32f2f;
+    border-color: #fca5a5;
+    animation: pulse 1.5s infinite;
+}
+
+.char-limit {
+    text-align: right;
+    font-size: 0.75rem;
+    color: var(--text-light);
+    margin-top: 5px;
+}
+
+/* --- File Upload --- */
+.file-drop-zone {
+    border: 2px dashed #d1d5db;
+    border-radius: 12px;
+    padding: 30px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.2s;
+    background: #fafafa;
+}
+
+.file-drop-zone:hover {
+    border-color: var(--primary-color);
+    background: #f0f4ff;
+}
+
+.file-drop-zone.has-file {
+    border-style: solid;
+    border-color: var(--accent-color);
+    background: #f0fdf4;
+}
+
+.drop-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.drop-icon {
+    color: var(--primary-color);
+}
+
+.drop-text h4 {
+    margin: 0;
+    font-size: 1rem;
+    color: var(--text-dark);
+}
+
+.drop-text p {
+    margin: 5px 0 0;
+    font-size: 0.8rem;
+    color: var(--text-light);
+}
+
+/* --- Declaration --- */
+.declaration-box {
+    background: #fff8e1; /* Light yellow warning bg */
+    padding: 15px;
+    border-radius: var(--border-radius);
+    border-left: 4px solid #ffb300;
+    margin-bottom: 30px;
+}
+
+.checkbox-wrapper {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+}
+
+.checkbox-wrapper input {
+    margin-top: 4px;
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+}
+
+.checkbox-wrapper label {
+    font-size: 0.9rem;
+    line-height: 1.5;
+    cursor: pointer;
+}
+
+/* --- Submit Button --- */
+.form-actions {
+    text-align: center;
+}
+
+.btn-submit {
+    background: var(--primary-color);
+    color: var(--white);
+    padding: 14px 40px;
+    border: none;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(26, 35, 126, 0.3);
+    transition: transform 0.2s, background 0.2s;
+    width: 100%; /* Mobile: Full width */
+}
+
+.btn-submit:hover {
+    background: #0d165f;
+    transform: translateY(-2px);
+}
+
+/* --- Success View --- */
+.success-view {
+    text-align: center;
+    padding: 60px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.success-icon {
+    color: var(--accent-color);
+    margin-bottom: 20px;
+}
+
+.success-view h2 {
+    color: var(--text-dark);
+    margin-bottom: 10px;
+}
+
+.success-view p {
+    color: var(--text-light);
+    margin-bottom: 30px;
+}
+
+.btn-primary {
+    background: var(--primary-color);
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+}
+
+/* --- Loading Spinner --- */
+.loading-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(255,255,255,0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+}
+
+.spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid #f3f3f3;
+    border-top: 4px solid var(--secondary-color);
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+/* --- Animations --- */
+@keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(211, 47, 47, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(211, 47, 47, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(211, 47, 47, 0); }
+}
+
+/* --- Desktop Responsiveness (Min-width: 768px) --- */
+@media (min-width: 768px) {
+    .form-grid {
+        grid-template-columns: 1fr 1fr; /* 2 Columns */
+    }
+
+    .span-full {
+        grid-column: span 2; /* Span full width */
+    }
+
+    .span-2-mobile {
+        grid-column: span 1; /* Reset on desktop if needed */
+    }
+
+    .btn-submit {
+        width: auto; /* Desktop: Auto width */
+        min-width: 250px;
+    }
+}

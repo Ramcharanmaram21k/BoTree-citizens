@@ -1,0 +1,211 @@
+/* --- Global & Utilities (Mobile Default) --- */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.text-center { text-align: center; }
+.mb-4 { margin-bottom: 1.5rem; }
+
+/* Grids stack vertically by default (Mobile) */
+.grid-3, .grid-4 {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 20px;
+}
+
+/* --- Hero Section --- */
+.hero {
+    background-color: #FBC02D;
+    position: relative;
+    padding: 40px 0;
+    overflow: hidden;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.hero-content {
+    display: flex;
+    flex-direction: column; /* Stack content on mobile */
+    align-items: center;
+    gap: 30px;
+    position: relative;
+    z-index: 2;
+}
+
+.hero-text { text-align: center; /* Center text on mobile */ }
+.hero-text h1 { color: #1a237e; font-size: 1.5rem; margin-bottom: 15px; line-height: 1.3; }
+.hero-text p { font-size: 1rem; line-height: 1.6; margin-bottom: 20px; color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,0.2); }
+
+.hero-list {
+    list-style-type: none;
+    margin-bottom: 25px;
+    color: #fff;
+    font-size: 1rem;
+    text-align: left; /* Keep list left aligned even on mobile */
+    display: inline-block;
+}
+.hero-list li { margin-bottom: 8px; }
+
+/* Hero Buttons (Mobile: Full width, stacked) */
+/* --- Hero Actions (Container) --- */
+.hero-actions {
+    display: flex;
+    gap: 20px; /* Space between buttons */
+    margin-top: 30px;
+    flex-wrap: wrap;
+}
+
+/* Ensure the Links don't mess up layout */
+.hero-actions a {
+    text-decoration: none;
+}
+
+/* --- Shared Button Styles (Base) --- */
+.btn-lodge, .btn-check-status {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+
+    /* Size Control - Same for both */
+    min-width: 200px;  /* Ensures equal width */
+    height: 50px;      /* Ensures equal height */
+    padding: 0 25px;
+
+    /* Typography */
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 50px; /* Pill shape */
+    cursor: pointer;
+    transition: all 0.3s ease; /* Smooth hover transition */
+    border: 2px solid transparent; /* Placeholder for border consistency */
+}
+
+/* --- Primary Button: Lodge Grievance (Navy Blue) --- */
+.btn-lodge {
+    background-color: #1a237e;
+    color: white;
+    box-shadow: 0 4px 15px rgba(26, 35, 126, 0.4);
+}
+
+.btn-lodge:hover {
+    background-color: #283593; /* Slightly lighter blue */
+    transform: translateY(-3px); /* Moves up slightly */
+    box-shadow: 0 6px 20px rgba(26, 35, 126, 0.6);
+}
+
+/* --- Secondary Button: Check Status (White) --- */
+.btn-check-status {
+    background-color: white;
+    color: #1a237e;
+    border: 2px solid white; /* Matches bg */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.btn-check-status:hover {
+    background-color: transparent; /* See-through */
+    border: 2px solid white;       /* White border remains */
+    color: white;                  /* Text turns white */
+    transform: translateY(-3px);
+}
+
+/* --- Mobile Adjustments --- */
+@media (max-width: 768px) {
+    .hero-actions {
+        flex-direction: column;
+        width: 100%;
+    }
+    .btn-lodge, .btn-check-status {
+        width: 100%; /* Full width on mobile */
+    }
+}
+
+/* CM Image (Mobile) */
+.cm-profile { width: 100%; display: flex; justify-content: center; }
+.cm-img { height: 250px; object-fit: contain; }
+
+/* --- Process Section --- */
+.process-section { padding: 40px 0; background: #fff; }
+.section-title { color: #1a237e; font-size: 1.5rem; margin-bottom: 10px; }
+.title-underline { height: 4px; width: 60px; background: #E64A19; border-radius: 2px; margin-bottom: 20px; }
+
+.process-card {
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+    text-align: center;
+    border: 1px solid #eee;
+}
+.process-icon { color: #555; margin-bottom: 15px; }
+
+/* --- Stats Section --- */
+.stats-section { padding: 40px 0; background: white; }
+.stat-card {
+    padding: 30px 20px;
+    border-radius: 12px;
+    color: white;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+.stat-red { background: linear-gradient(135deg, #D32F2F, #b71c1c); }
+.stat-green { background: linear-gradient(135deg, #388E3C, #2e7d32); }
+.stat-yellow { background: linear-gradient(135deg, #FBC02D, #f9a825); }
+.stat-number { font-size: 2rem; font-weight: 800; margin-bottom: 5px; }
+
+
+/* =========================================
+   DESKTOP STYLES (Min-width: 768px)
+   ========================================= */
+@media (min-width: 768px) {
+    /* Layouts */
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid-4 { grid-template-columns: repeat(4, 1fr); }
+
+    /* Hero */
+    .hero { padding: 60px 0; }
+    .hero-content {
+        display: grid;
+        grid-template-columns: 1fr 1fr; /* Side by side */
+        align-items: center;
+        text-align: left;
+    }
+    .single-line-title {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+
+    @media (max-width: 480px) {
+        .single-line-title {
+            font-size: 1.2rem;
+        }
+    }
+
+
+
+    .hero-text { text-align: left; }
+    .hero-text h1 { font-size: 2rem; }
+
+    .hero-actions {
+        flex-direction: row; /* Side by side buttons */
+        width: auto;
+    }
+    .hero-actions a { width: auto; }
+    .btn-lodge, .btn-check-status { width: auto; }
+
+    .cm-img { height: 400px; /* Larger image on desktop */ }
+
+    /* Hover Effects (Only needed on desktop) */
+    .process-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+    .process-card:hover .process-icon { color: #E64A19; }
+    .btn-lodge:hover { background: #0d165f; transform: translateY(-2px); }
+    .btn-check-status:hover { background: transparent; color: white; }
+}

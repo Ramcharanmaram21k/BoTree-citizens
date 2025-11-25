@@ -1,0 +1,238 @@
+/* GENERAL LAYOUT */
+.site-header {
+    width: 100%;
+    box-shadow: 0 1px 0 rgba(0,0,0,0.04);
+    font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+}
+
+/* Top white bar */
+.header-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 20px;
+    background: #fff;
+    gap: 20px;
+}
+
+/* Logo + title */
+.logo-section {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    cursor: pointer;
+    min-width: 260px;
+}
+
+.logo-img {
+    width: 88px;           /* larger AP logo */
+    height: auto;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: column;
+    line-height: 1;
+}
+
+/* Reduced heading size so it doesn't dominate */
+.site-title {
+    margin: 0;
+    font-size: 1.05rem;    /* moderate size */
+    letter-spacing: 0.2px;
+    color: #0B3553; /* darker blue, keeps good contrast on white */
+    font-weight: 700;
+}
+
+.site-subtitle {
+    margin: 2px 0 0 0;
+    font-size: 0.78rem;
+    color: #5a6b73;
+    font-weight: 500;
+}
+
+/* CPGRAMS center badge area */
+.cpgrams-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+/* visually improved center box */
+.cpgrams-badge {
+    background: #072c49; /* kept deep blue */
+    color: #fff;
+    padding: 10px 18px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 6px 18px rgba(7,44,73,0.12);
+    transform: translateY(6px); /* slight overlap visual with top bar */
+    min-width: 260px;
+}
+
+.cpgrams-badge h3 {
+    margin: 0;
+    font-size: 0.95rem;
+    font-weight: 800;
+    letter-spacing: 0.6px;
+}
+
+.cpgrams-badge p {
+    margin: 4px 0 0 0;
+    font-size: 0.72rem;
+    opacity: 0.95;
+}
+
+/* Minister profile on right */
+.minister-profile {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 200px;
+    justify-content: flex-end;
+}
+
+.minister-text {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+}
+
+.minister-name {
+    margin: 0;
+    font-size: 0.95rem;
+    color: #0B3553;
+    font-weight: 700;
+}
+
+.minister-title {
+    margin: 2px 0 0 0;
+    font-size: 0.75rem;
+    color: #6b7b83;
+}
+
+/* Larger minister image (rounded) */
+.minister-img {
+    width: 68px;        /* increased size */
+    height: 68px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid rgba(11,53,83,0.08);
+    box-shadow: 0 6px 12px rgba(11,53,83,0.06);
+}
+
+/* ORANGE NAVBAR */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #E64A19; /* govt orange kept */
+    padding: 10px 22px;
+}
+
+/* nav links */
+.nav-links {
+    display: flex;
+    gap: 22px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    align-items: center;
+}
+
+.nav-links li {
+    color: #fff;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 8px 10px;
+    border-radius: 6px;
+}
+
+.nav-links li:hover {
+    background: rgba(255,255,255,0.08);
+}
+
+/* actions on right */
+.nav-actions {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
+
+/* login button */
+.btn-login {
+    background: #fff;
+    color: #E64A19;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 20px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 3px 8px rgba(0,0,0,0.08);
+}
+
+.btn-login:hover {
+    transform: translateY(-1px);
+}
+
+/* Language toggle */
+.lang-toggle-container {
+    display: flex;
+    background-color: rgba(255, 255, 255, 0.18);
+    border: 1px solid rgba(255, 255, 255, 0.35);
+    border-radius: 25px;
+    padding: 3px;
+}
+
+.lang-tab {
+    background: transparent;
+    border: none;
+    color: #fff;
+    padding: 6px 12px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: 20px;
+    transition: all 0.18s ease;
+    outline: none;
+}
+
+.lang-tab.active {
+    background-color: #fff;
+    color: #E64A19;
+    font-weight: 800;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.12);
+}
+
+/* RESPONSIVE */
+@media (max-width: 1024px) {
+    .logo-img { width: 72px; }
+    .minister-img { width: 60px; height: 60px; }
+    .cpgrams-badge { min-width: 220px; padding: 8px 14px; transform: translateY(4px); }
+}
+
+@media (max-width: 768px) {
+    .header-top {
+        padding: 10px 12px;
+        gap: 10px;
+    }
+
+    .logo-text .site-title { font-size: 0.95rem; }
+    .site-subtitle { display: none; } /* keep compact on mobile */
+
+    .cpgrams-container { display: none; } /* hide center badge on small screens to save space */
+
+    .nav-links { gap: 12px; }
+    .nav-links li { font-size: 0.88rem; padding: 6px 8px; }
+    .logo-img { width: 64px; }
+    .minister-img { width: 54px; height: 54px; }
+}
+
+/* Small accessibility focus style */
+.logo-section:focus, .nav-links li:focus {
+    outline: 3px solid rgba(7,44,73,0.08);
+    outline-offset: 3px;
+}
