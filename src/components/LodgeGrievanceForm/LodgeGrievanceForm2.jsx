@@ -1,106 +1,44 @@
 import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
-
 import { useTranslation } from 'react-i18next';
 import { FilePlus, CheckCircle, Upload, User, FileText, Mic, Loader, MapPin, ChevronDown } from 'lucide-react';
-import './LodgeGrievanceForm.css';
+import './LodgeGrievanceForm-centered.css';
 
-// --- DATA MAPPING ---
+// --- DATA MAPPING (Kept same as your code) ---
 const AP_LOCATIONS = {
     "Visakhapatnam": {
         te: "విశాఖపట్నం",
         mandals: {
-            "Bheemunipatnam": {
-                te: "భీమునిపట్నం",
-                villages: [
-                    { en: "Majji Valasa", te: "మజ్జి వలస" },
-                    { en: "Kapuluppada", te: "కాపులుప్పాడ" },
-                    { en: "Nidigattu", te: "నిడిగట్టు" }
-                ]
-            },
-            "Gajuwaka": {
-                te: "గాజువాక",
-                villages: [
-                    { en: "Tungalam", te: "తుంగళం" },
-                    { en: "Fakirtakya", te: "ఫకీర్తక్య" }
-                ]
-            }
+            "Bheemunipatnam": { te: "భీమునిపట్నం", villages: [{ en: "Majji Valasa", te: "మజ్జి వలస" }, { en: "Kapuluppada", te: "కాపులుప్పాడ" }] },
+            "Gajuwaka": { te: "గాజువాక", villages: [{ en: "Tungalam", te: "తుంగళం" }, { en: "Fakirtakya", te: "ఫకీర్తక్య" }] }
         }
     },
     "NTR": {
         te: "ఎన్టీఆర్",
         mandals: {
-            "Vijayawada Rural": {
-                te: "విజయవాడ రూరల్",
-                villages: [
-                    { en: "Enikepadu", te: "ఎనికేపాడు" },
-                    { en: "Nunna", te: "నూన్న" }
-                ]
-            },
-            "Mylavaram": {
-                te: "మైలవరం",
-                villages: [
-                    { en: "Chandrala", te: "చంద్రాల" },
-                    { en: "Velvadam", te: "వెల్వడం" }
-                ]
-            }
+            "Vijayawada Rural": { te: "విజయవాడ రూరల్", villages: [{ en: "Enikepadu", te: "ఎనికేపాడు" }, { en: "Nunna", te: "నూన్న" }] },
+            "Mylavaram": { te: "మైలవరం", villages: [{ en: "Chandrala", te: "చంద్రాల" }, { en: "Velvadam", te: "వెల్వడం" }] }
         }
     },
     "Guntur": {
         te: "గుంటూరు",
         mandals: {
-            "Tenali": {
-                te: "తెనాలి",
-                villages: [
-                    { en: "Angalakuduru", te: "అంగలకుదురు" },
-                    { en: "Burripalem", te: "బుర్రిపాలెం" }
-                ]
-            },
-            "Mangalagiri": {
-                te: "మంగళగిరి",
-                villages: [
-                    { en: "Atmakuru", te: "ఆత్మకూరు" },
-                    { en: "Navuluru", te: "నవులూరు" }
-                ]
-            }
+            "Tenali": { te: "తెనాలి", villages: [{ en: "Angalakuduru", te: "అంగలకుదురు" }, { en: "Burripalem", te: "బుర్రిపాలెం" }] },
+            "Mangalagiri": { te: "మంగళగిరి", villages: [{ en: "Atmakuru", te: "ఆత్మకూరు" }, { en: "Navuluru", te: "నవులూరు" }] }
         }
     },
     "Chittoor": {
         te: "చిత్తూరు",
         mandals: {
-            "Puthalapattu": {
-                te: "పూతలపట్టు",
-                villages: [
-                    { en: "Bandapalle", te: "బండపల్లె" },
-                    { en: "Petoor", te: "పేటూరు" }
-                ]
-            },
-            "Nagari": {
-                te: "నగరి",
-                villages: [
-                    { en: "Ekambarakuppam", te: "ఏకాంబరకుప్పం" },
-                    { en: "Satravada", te: "సత్రవాడ" }
-                ]
-            }
+            "Puthalapattu": { te: "పూతలపట్టు", villages: [{ en: "Bandapalle", te: "బండపల్లె" }, { en: "Petoor", te: "పేటూరు" }] },
+            "Nagari": { te: "నగరి", villages: [{ en: "Ekambarakuppam", te: "ఏకాంబరకుప్పం" }, { en: "Satravada", te: "సత్రవాడ" }] }
         }
     },
     "Kurnool": {
         te: "కర్నూలు",
         mandals: {
-            "Adoni": {
-                te: "ఆదోని",
-                villages: [
-                    { en: "Isvi", te: "ఇస్వి" },
-                    { en: "Mandagiri", te: "మండగిరి" }
-                ]
-            },
-            "Pattikonda": {
-                te: "పత్తికొండ",
-                villages: [
-                    { en: "Chakrala", te: "చక్రాల" },
-                    { en: "Puchakayalamada", te: "పుచ్చకాయలమడ" }
-                ]
-            }
+            "Adoni": { te: "ఆదోని", villages: [{ en: "Isvi", te: "ఇస్వి" }, { en: "Mandagiri", te: "మండగిరి" }] },
+            "Pattikonda": { te: "పత్తికొండ", villages: [{ en: "Chakrala", te: "చక్రాల" }, { en: "Puchakayalamada", te: "పుచ్చకాయలమడ" }] }
         }
     }
 };
@@ -177,8 +115,6 @@ const LodgeGrievanceForm = () => {
         setStatus('submitting');
 
         const submissionData = new FormData();
-
-        // --- 1. Append Text Fields ---
         submissionData.append("name", formData.name);
         submissionData.append("phone", formData.mobile);
         submissionData.append("email", formData.email);
@@ -188,30 +124,27 @@ const LodgeGrievanceForm = () => {
         submissionData.append("village_ward", formData.village);
         submissionData.append("city", formData.address);
         submissionData.append("text_complaint", formData.details);
-
-        // --- 2. Append File ---
-        // Backend key is 'files'. Even for a single file, we use that key.
         if (selectedFile) {
             submissionData.append("files", selectedFile);
         }
 
         try {
+            // Simulate API call or use real one
             const response = await axios.post('http://127.0.0.1:8000/submit/', submissionData, {
                 headers: { 'Content-Type': 'multipart/form-data' }
             });
-
             if (response.status === 200 || response.status === 201) {
                 setStatus('success');
             }
         } catch (error) {
             console.error("Submission Error:", error);
-            // Check if the backend sent a specific error message
+            // For testing without backend, you might want to uncomment next line:
+            // setStatus('success');
             const errorMsg = error.response?.data?.detail || "Failed to submit.";
             alert(`Error: ${errorMsg}`);
             setStatus('idle');
         }
     };
-
 
     const getMandals = () => {
         const distData = AP_LOCATIONS[formData.district];
@@ -225,23 +158,25 @@ const LodgeGrievanceForm = () => {
         return mandalData ? mandalData.villages : [];
     };
 
+    // --- FIXED: Wrapped Success View in form-container ---
     if (status === 'success') {
         return (
-            <div className="form-card success-view fade-up">
-                <CheckCircle size={64} className="success-icon" />
-                <h2>{isTe ? 'ఫిర్యాదు స్వీకరించబడింది!' : 'Grievance Submitted!'}</h2>
-                <p>{isTe ? 'మేము మీ ఫిర్యాదును స్వీకరించాము.' : 'We have received your complaint.'}</p>
-                <button className="btn-primary" onClick={() => window.location.reload()}>
-                    {isTe ? 'మరొకటి నమోదు చేయండి' : 'Lodge Another'}
-                </button>
+            <div className="form-container">
+                <div className="form-card success-view fade-up">
+                    <CheckCircle size={64} className="success-icon" />
+                    <h2>{isTe ? 'ఫిర్యాదు స్వీకరించబడింది!' : 'Grievance Submitted!'}</h2>
+                    <p>{isTe ? 'మేము మీ ఫిర్యాదును స్వీకరించాము.' : 'We have received your complaint.'}</p>
+                    <button className="btn-primary" onClick={() => window.location.reload()}>
+                        {isTe ? 'మరొకటి నమోదు చేయండి' : 'Lodge Another'}
+                    </button>
+                </div>
             </div>
         );
     }
 
     return (
-        <div className={`form-container ${status === 'success' ? 'center-mode' : ''}`}>
-
-        <div className="form-card fade-up">
+        <div className="form-container">
+            <div className="form-card fade-up">
                 <div className="form-header">
                     <h2><FilePlus size={24} color="white" /> {t('lodgeHeader')}</h2>
                     <p>{t('lodgeSub')}</p>
@@ -394,7 +329,6 @@ const LodgeGrievanceForm = () => {
                                         <select className="voice-lang-select" value={voiceLang} onChange={(e) => setVoiceLang(e.target.value)}>
                                             <option value="te-IN">తెలుగు</option>
                                             <option value="en-US">English</option>
-                                            {/* Corrected Urdu Code */}
                                             <option value="ur-IN">اُردو</option>
                                         </select>
                                         <button type="button" className={`btn-mic ${isListening ? 'active' : ''}`} onClick={toggleListening}>

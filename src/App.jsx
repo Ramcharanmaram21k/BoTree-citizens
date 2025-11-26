@@ -6,7 +6,7 @@ import './App.css';
 import Header from './components/Header/Header.jsx';
 import Home from './components/Home/Home.jsx';
 import Footer from './components/Footer/Footer.jsx';
-import LodgeGrievanceForm from "./components/LodgeGrievanceForm/LodgeGrievanceForm.jsx";
+import LodgeGrievanceForm from "./components/LodgeGrievanceForm/LodgeGrievanceForm2.jsx";
 import GrievanceStatus from './components/GrevienceStatus/GrevienceStatus.jsx';
 
 function App() {
