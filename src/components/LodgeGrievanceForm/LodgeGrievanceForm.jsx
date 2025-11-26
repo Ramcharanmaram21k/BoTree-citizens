@@ -1,4 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
+import axios from 'axios';
+
 import { useTranslation } from 'react-i18next';
 import { FilePlus, CheckCircle, Upload, User, FileText, Mic, Loader, MapPin, ChevronDown } from 'lucide-react';
 import './LodgeGrievanceForm.css';
@@ -166,15 +168,50 @@ const LodgeGrievanceForm = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
         if (!formData.declaration) {
             alert(isTe ? "దయచేసి డిక్లరేషన్‌ను అంగీకరించండి" : "Please accept the declaration.");
             return;
         }
+
         setStatus('submitting');
-        setTimeout(() => {
-            setStatus('success');
-        }, 2000);
+
+        const submissionData = new FormData();
+
+        // --- 1. Append Text Fields ---
+        submissionData.append("name", formData.name);
+        submissionData.append("phone", formData.mobile);
+        submissionData.append("email", formData.email);
+        submissionData.append("gender", formData.gender);
+        submissionData.append("district", formData.district);
+        submissionData.append("mandal", formData.mandal);
+        submissionData.append("village_ward", formData.village);
+        submissionData.append("city", formData.address);
+        submissionData.append("text_complaint", formData.details);
+
+        // --- 2. Append File ---
+        // Backend key is 'files'. Even for a single file, we use that key.
+        if (selectedFile) {
+            submissionData.append("files", selectedFile);
+        }
+
+        try {
+            const response = await axios.post('http://127.0.0.1:8000/submit/', submissionData, {
+                headers: { 'Content-Type': 'multipart/form-data' }
+            });
+
+            if (response.status === 200 || response.status === 201) {
+                setStatus('success');
+            }
+        } catch (error) {
+            console.error("Submission Error:", error);
+            // Check if the backend sent a specific error message
+            const errorMsg = error.response?.data?.detail || "Failed to submit.";
+            alert(`Error: ${errorMsg}`);
+            setStatus('idle');
+        }
     };
+
 
     const getMandals = () => {
         const distData = AP_LOCATIONS[formData.district];
