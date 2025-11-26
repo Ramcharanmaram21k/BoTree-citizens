@@ -130,7 +130,7 @@ const LodgeGrievanceForm = () => {
 
         try {
             // Simulate API call or use real one
-            const response = await axios.post('https://backend-botree-kvl7pzvq6-ramcharans-projects-90b10c9a.vercel.app', submissionData, {
+            const response = await axios.post('https://backend-botree-kvl7pzvq6-ramcharans-projects-90b10c9a.vercel.app/submit', submissionData, {
                 headers: { 'Content-Type': 'multipart/form-data' }
             });
             if (response.status === 200 || response.status === 201) {
