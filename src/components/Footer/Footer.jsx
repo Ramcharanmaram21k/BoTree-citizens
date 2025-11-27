@@ -1,6 +1,7 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
 import './Footer.css';
+import footer_logo from '../../assets/rtgs-logo.png'
 
 const Footer = () => {
     const { t } = useTranslation();
@@ -16,7 +17,7 @@ const Footer = () => {
                         <p>Email: pgrs-helpdesk[at]ap[dot]gov[dot]in</p>
                     </div>
                     <div className="rtgs-logo text-center">
-                        <img src="https://placehold.co/100x50" alt="RTGS" />
+                        <img src={footer_logo} alt="RTGS" />
                         <p>REAL TIME GOVERNANCE</p>
                     </div>
                 </div>

@@ -1,10 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
-import axios from 'axios';
+// import axios from 'axios'; // Removed Backend Dependency
 import { useTranslation } from 'react-i18next';
 import { FilePlus, CheckCircle, Upload, User, FileText, Mic, Loader, MapPin, ChevronDown } from 'lucide-react';
 import './LodgeGrievanceForm-centered.css';
 
-// --- DATA MAPPING (Kept same as your code) ---
+// --- DATA MAPPING ---
 const AP_LOCATIONS = {
     "Visakhapatnam": {
         te: "విశాఖపట్నం",
@@ -107,43 +107,22 @@ const LodgeGrievanceForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
+        // 1. Check Declaration
         if (!formData.declaration) {
             alert(isTe ? "దయచేసి డిక్లరేషన్‌ను అంగీకరించండి" : "Please accept the declaration.");
             return;
         }
 
+        // 2. Show Loading Spinner
         setStatus('submitting');
 
-        const submissionData = new FormData();
-        submissionData.append("name", formData.name);
-        submissionData.append("phone", formData.mobile);
-        submissionData.append("email", formData.email);
-        submissionData.append("gender", formData.gender);
-        submissionData.append("district", formData.district);
-        submissionData.append("mandal", formData.mandal);
-        submissionData.append("village_ward", formData.village);
-        submissionData.append("city", formData.address);
-        submissionData.append("text_complaint", formData.details);
-        if (selectedFile) {
-            submissionData.append("files", selectedFile);
-        }
-
-        try {
-            // Simulate API call or use real one
-            const response = await axios.post('http://127.0.0.1:8000/submit/', submissionData, {
-                headers: { 'Content-Type': 'multipart/form-data' }
-            });
-            if (response.status === 200 || response.status === 201) {
-                setStatus('success');
-            }
-        } catch (error) {
-            console.error("Submission Error:", error);
-            // For testing without backend, you might want to uncomment next line:
-            // setStatus('success');
-            const errorMsg = error.response?.data?.detail || "Failed to submit.";
-            alert(`Error: ${errorMsg}`);
-            setStatus('idle');
-        }
+        // 3. Simulate Network Request (Mocking Backend)
+        setTimeout(() => {
+            // After 1.5 seconds, show success
+            setStatus('success');
+            console.log("Mock Submission Data:", formData);
+            if(selectedFile) console.log("Mock File:", selectedFile.name);
+        }, 1500);
     };
 
     const getMandals = () => {
@@ -158,7 +137,7 @@ const LodgeGrievanceForm = () => {
         return mandalData ? mandalData.villages : [];
     };
 
-    // --- FIXED: Wrapped Success View in form-container ---
+    // --- SUCCESS CARD VIEW ---
     if (status === 'success') {
         return (
             <div className="form-container">
